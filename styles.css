@@ -106,6 +106,10 @@ nav.links a:hover { color: var(--text); text-decoration: none; }
   border-radius: 3px;
 }
 
+.mobile-panel {
+  display: none;
+}
+
 /* ---------- Hero ---------- */
 .hero {
   padding: 110px 0 90px;
@@ -307,9 +311,12 @@ h2.section-title {
   padding: 28px 24px;
 }
 .step-num {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   color: var(--accent-text);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   display: block;
   margin-bottom: 10px;
 }
@@ -423,7 +430,9 @@ footer.site-footer {
 
 @media (max-width: 640px) {
   nav.links { display: none; }
+  .nav-cta { display: none; }
   .menu-toggle { display: inline-block; }
+  .nav-inner { padding: 14px 20px; }
   .nav-inner.open + .mobile-panel { display: flex; }
   .mobile-panel {
     display: none;
