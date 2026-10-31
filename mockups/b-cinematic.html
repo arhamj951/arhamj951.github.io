@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arham Jamshaid — Cinematic Hero Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #05060a;
+    --bg-2: #0a0c12;
+    --steel: #8a9bb0;
+    --steel-bright: #c2cfdc;
+    --steel-dim: #3c4756;
+    --ink: #eef0f3;
+    --ink-dim: #767e89;
+    --ink-dimmer: #4b5159;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  .hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    isolation: isolate;
+  }
+
+  /* Base near-black gradient depth, darker at edges */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 140% 100% at 85% -10%, rgba(138,155,176,0.14), transparent 55%),
+      linear-gradient(180deg, #060709 0%, #05060a 55%, #030304 100%);
+    z-index: 0;
+  }
+
+  /* The cinematic light-streak sweep — single dramatic diagonal, like a title-card key light */
+  .light-streak {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      115deg,
+      transparent 0%,
+      transparent 38%,
+      rgba(138, 155, 176, 0.05) 46%,
+      rgba(180, 196, 212, 0.16) 51%,
+      rgba(138, 155, 176, 0.05) 56%,
+      transparent 64%,
+      transparent 100%
+    );
+    mix-blend-mode: screen;
+  }
+
+  .light-streak::after {
+    content: "";
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 60%;
+    height: 140%;
+    background: linear-gradient(
+      200deg,
+      rgba(140, 160, 182, 0.22),
+      transparent 60%
+    );
+    filter: blur(40px);
+  }
+
+  /* fine grain / vignette corners to keep it premium rather than flat */
+  .grain-vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(ellipse 90% 70% at 50% 100%, rgba(0,0,0,0.55), transparent 60%);
+  }
+
+  .corner-mark {
+    position: absolute;
+    top: 48px;
+    left: 56px;
+    z-index: 3;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-dim);
+    letter-spacing: 0.01em;
+    max-width: 240px;
+  }
+
+  .corner-mark .line1 {
+    color: var(--steel);
+  }
+
+  .frame-tick {
+    position: absolute;
+    top: 48px;
+    right: 56px;
+    z-index: 3;
+    font-size: 12px;
+    color: var(--ink-dimmer);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.08em;
+  }
+
+  .content {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    padding: 0 56px 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .headline-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  h1.headline {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-transform: none;
+    font-size: clamp(3.4rem, 8.4vw, 7.6rem);
+    line-height: 0.96;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    max-width: 1180px;
+    text-align: right;
+    margin-bottom: 44px;
+  }
+
+
+  .below-headline {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+  }
+
+  .copy-block {
+    max-width: 480px;
+  }
+
+  .subhead {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--ink-dim);
+    font-weight: 400;
+    max-width: 46ch;
+  }
+
+  .actions {
+    display: flex;
+    gap: 14px;
+    flex-shrink: 0;
+    align-items: center;
+  }
+
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--steel-bright);
+    color: #0a0c10;
+    border: 1px solid var(--steel-bright);
+  }
+
+  .btn-primary:hover {
+    background: #d7e0ea;
+    border-color: #d7e0ea;
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink-dimmer);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--steel);
+    color: var(--steel-bright);
+    transform: translateY(-1px);
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--steel-bright);
+    outline-offset: 3px;
+  }
+
+  .baseline-rule {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--steel-dim) 50%, transparent);
+    opacity: 0.5;
+    z-index: 3;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .light-streak {
+      animation: sweep-in 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    h1.headline, .below-headline, .corner-mark {
+      animation: rise-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .corner-mark { animation-delay: 0.05s; }
+    h1.headline { animation-delay: 0.15s; }
+    .below-headline { animation-delay: 0.4s; }
+  }
+
+  @keyframes sweep-in {
+    from { opacity: 0; transform: translateX(6%); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 760px) {
+    .content { padding: 0 24px 56px; }
+    .corner-mark { left: 24px; top: 28px; max-width: 180px; }
+    .frame-tick { right: 24px; top: 28px; }
+    h1.headline { text-align: left; max-width: 100%; }
+    .headline-wrap { justify-content: flex-start; }
+    .below-headline { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .actions { width: 100%; }
+    .btn { flex: 1; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="light-streak"></div>
+  <div class="grain-vignette"></div>
+
+  <div class="corner-mark">
+    <div class="line1">Lahore, Pakistan.</div>
+    <div>Software developer and technical generalist.</div>
+  </div>
+
+  <div class="frame-tick">01 / 01</div>
+
+  <div class="content">
+    <div class="headline-wrap">
+      <h1 class="headline">
+        I build the things<br>
+        people need built,<br>
+        then stick around<br>
+        to grow them.
+      </h1>
+    </div>
+
+    <div class="below-headline">
+      <div class="copy-block">
+        <p class="subhead">You deal with me directly — no account manager, no ticket queue. Open to full-time, contract, or partner work: technical, operational, or go-to-market.</p>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-secondary">See the work</button>
+        <button class="btn btn-primary">Say hello</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="baseline-rule"></div>
+</section>
+
+</body>
+</html>
